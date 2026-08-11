@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.PICTURE_IN_PICTURE" />
     <application
+        android:name=".ViperApplication"
         android:allowBackup="false"
         android:icon="@android:drawable/ic_menu_search"
         android:label="ViperBrowser"

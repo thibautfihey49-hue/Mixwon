@@ -15,11 +15,24 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private static final String PREFS_NAME = "ViperBrowserPrefs";
     private List<String> onglets = new ArrayList<>();
+    private static boolean estEnCours = false; // Pour detecter crash
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        // ===== ALERTE SI L'APP S'EST FERMÉE LA DERNIÈRE FOIS =====
+        boolean etatCrash = prefs.getBoolean("app_crashee", false);
+        if (etatCrash) {
+            Toast.makeText(this, "⚠️ L'application s'est fermée anormalement la dernière fois", Toast.LENGTH_LONG).show();
+            prefs.edit().putBoolean("app_crashee", false).apply(); // Reinitialiser
+        }
+        
+        // Marquer l'app comme en cours d'execution
+        prefs.edit().putBoolean("app_en_cours", true).apply();
+        estEnCours = true;
+        
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         searchBar = findViewById(R.id.searchBar);
         searchBar.setOnEditorActionListener((v, actionId, event) -> {
@@ -27,6 +40,32 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
         onglets.add("Accueil");
+    }
+
+    // ===== ENREGISTRER LA FERMETURE NORMALE =====
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        estEnCours = false;
+        prefs.edit().putBoolean("app_en_cours", false).apply();
+        prefs.edit().putBoolean("app_crashee", false).apply();
+    }
+
+    // ===== ENREGISTRER LE CRASH SI L'APP EST TUÉE =====
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (isFinishing()) {
+            // Fermeture normale
+            prefs.edit().putBoolean("app_crashee", false).apply();
+        } else {
+            // Passage en arrière-plan (normal)
+        }
+    }
+
+    // Methode pour verifier au prochain demarrage
+    public static boolean verifierCrash(SharedPreferences prefs) {
+        return prefs.getBoolean("app_en_cours", false);
     }
 
     public void validerRecherche(View v) {
@@ -60,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // ========== BARRE DE NAVIGATION ==========
     public void retourAccueil(View v) { Toast.makeText(this, "🏠 Accueil", Toast.LENGTH_SHORT).show(); }
     public void nouvelOnglet(View v) { onglets.add("Nouvel onglet"); Toast.makeText(this, "📑 Nouvel onglet - Total: " + onglets.size(), Toast.LENGTH_SHORT).show(); }
     public void toutTelecharger(View v) { Toast.makeText(this, "📥 Detection videos en cours...", Toast.LENGTH_SHORT).show(); }
@@ -68,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     public void lectureArrierePlan(View v) { Toast.makeText(this, "🎵 Lecture en arriere-plan activee", Toast.LENGTH_SHORT).show(); }
     public void openSettings(View v) { Toast.makeText(this, "⚙️ Parametres bientot disponible", Toast.LENGTH_SHORT).show(); }
 
-    // ========== FONCTIONS ==========
     public void toggleAdBlock(View v) {
         boolean estActif = prefs.getBoolean("adblock_enabled", false);
         prefs.edit().putBoolean("adblock_enabled", !estActif).apply();
@@ -82,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
     public void openFavorites(View v) { Toast.makeText(this, "⭐ Favoris - " + compterFavoris() + " elements", Toast.LENGTH_SHORT).show(); }
     public void openHistory(View v) { Toast.makeText(this, "📜 Historique - " + compterHistorique() + " pages", Toast.LENGTH_SHORT).show(); }
 
-    // ========== GESTION ==========
     private void ajouterHistorique(String url) {
         if (prefs.getBoolean("incognito_mode", false)) return;
         String historique = prefs.getString("history_list", "");
