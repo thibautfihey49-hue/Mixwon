@@ -13,16 +13,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            setContentView(R.layout.activity_main);
-            searchBar = findViewById(R.id.searchBar);
-            searchBar.setOnEditorActionListener((v, actionId, event) -> {
-                validerRecherche(v);
-                return true;
-            });
-        } catch (Throwable t) {
-            Toast.makeText(this, "ERREUR: " + t.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        setContentView(R.layout.activity_main);
+        searchBar = findViewById(R.id.searchBar);
+        searchBar.setOnEditorActionListener((v, actionId, event) -> {
+            validerRecherche(v);
+            return true;
+        });
     }
 
     public void validerRecherche(View v) {
@@ -39,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             url = "https://www.google.com/search?q=" + requete.replace(" ", "+");
         }
-        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", url));
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
         searchBar.setText("");
     }
 
@@ -49,15 +47,30 @@ public class MainActivity extends AppCompatActivity {
     public void openReddit(View v) { ouvrir("https://reddit.com"); }
 
     private void ouvrir(String url) {
-        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", url));
+        Intent intent = new Intent(this, WebViewActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
     }
 
-    public void toggleAdBlock(View v) { Toast.makeText(this, "🛡️ AdBlock activé", Toast.LENGTH_SHORT).show(); }
-    public void openIncognito(View v) { Toast.makeText(this, "🕵️ Mode Incognito", Toast.LENGTH_SHORT).show(); }
-    public void toggleNightMode(View v) { Toast.makeText(this, "🌙 Mode Nuit", Toast.LENGTH_SHORT).show(); }
-    public void toggleDataSaving(View v) { Toast.makeText(this, "⚡ Éco données", Toast.LENGTH_SHORT).show(); }
-    public void openFavorites(View v) { Toast.makeText(this, "⭐ Favoris", Toast.LENGTH_SHORT).show(); }
-    public void toggleAutoClear(View v) { Toast.makeText(this, "🧹 Auto-Clear", Toast.LENGTH_SHORT).show(); }
-    public void effacerTout(View v) { searchBar.setText(""); Toast.makeText(this, "🗑️ Barre effacée", Toast.LENGTH_SHORT).show(); }
-    public void openSettings(View v) { Toast.makeText(this, "⚙️ Paramètres", Toast.LENGTH_SHORT).show(); }
+    // ========== MÉTHODES DE LA BARRE DE NAVIGATION ==========
+    public void retourAccueil(View v) {
+        Toast.makeText(this, "🏠 Accueil", Toast.LENGTH_SHORT).show();
+        // Revient déjà ici, on est sur l'accueil
+    }
+
+    public void pagePrecedente(View v) {
+        Toast.makeText(this, "◀ Précédent — disponible dans la page web", Toast.LENGTH_SHORT).show();
+    }
+
+    public void pageSuivante(View v) {
+        Toast.makeText(this, "▶ Suivant — disponible dans la page web", Toast.LENGTH_SHORT).show();
+    }
+
+    public void actualiser(View v) {
+        Toast.makeText(this, "🔄 Actualiser", Toast.LENGTH_SHORT).show();
+    }
+
+    public void ouvrirFavoris(View v) {
+        Toast.makeText(this, "⭐ Favoris — bientôt disponible", Toast.LENGTH_SHORT).show();
+    }
 }
