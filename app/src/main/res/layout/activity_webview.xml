@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#0F0F1A"
     android:orientation="vertical">
-    <com.google.android.material.card.MaterialCardView
+
+    <!-- Barre d'adresse -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/surface"
-        app:cardElevation="2dp"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="4dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="5">
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="◀" android:onClick="precedent" android:gravity="center" android:paddingVertical="14dp" android:textColor="@color/onSurface" android:textSize="22sp"/>
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="▶" android:onClick="suivant" android:gravity="center" android:paddingVertical="14dp" android:textColor="@color/onSurface" android:textSize="22sp"/>
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🏠" android:onClick="retourAccueil" android:gravity="center" android:paddingVertical="14dp" android:textColor="@color/onSurface" android:textSize="22sp"/>
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="🔄" android:onClick="actualiser" android:gravity="center" android:paddingVertical="14dp" android:textColor="@color/onSurface" android:textSize="22sp"/>
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="📜" android:onClick="voirHistorique" android:gravity="center" android:paddingVertical="14dp" android:textColor="@color/onSurface" android:textSize="22sp"/>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-    <WebView android:id="@+id/webView" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+        android:background="#1A1A2E"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center"
+        android:elevation="4dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◀" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="precedent"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="suivant"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↻" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="actualiser"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/urlAffichage" android:text="" android:textSize="13sp" android:textColor="#B0B0C0" android:padding="8dp" android:ellipsize="middle"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="retourAccueil"/>
+    </LinearLayout>
+
+    <!-- Contenu Web -->
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
 </LinearLayout>

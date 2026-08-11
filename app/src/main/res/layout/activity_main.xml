@@ -2,21 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#12121F"
-    android:orientation="vertical">
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <!-- Zone de contenu scrollable -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:overScrollMode="never">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="24dp"
             android:gravity="center_horizontal">
 
             <!-- En-tête -->
@@ -25,40 +29,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="40dp">
+                android:layout_marginBottom="36dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🐍 ViperBrowser"
-                    android:textSize="42sp"
+                    android:textSize="38sp"
                     android:textStyle="bold"
-                    android:textColor="#7B61FF"/>
+                    android:textColor="@color/primary"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rapide • Sécurisé • Moderne"
-                    android:textSize="15sp"
-                    android:textColor="#B0B0C0"
-                    android:layout_marginTop="8dp"/>
+                    android:textSize="14sp"
+                    android:textColor="@color/textSecondary"
+                    android:layout_marginTop="6dp"/>
             </LinearLayout>
 
             <!-- Barre de recherche -->
             <LinearLayout
+                android:id="@+id/searchBarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#2A2A3C"
+                android:background="@drawable/search_bg"
                 android:orientation="horizontal"
-                android:padding="6dp"
+                android:padding="4dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="40dp"
-                android:layout_marginTop="8dp">
+                android:layout_marginBottom="36dp"
+                android:elevation="6dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🔍"
-                    android:textSize="24sp"
-                    android:padding="16dp"/>
+                    android:textSize="20sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="8dp"/>
                 <EditText
                     android:id="@+id/searchBar"
                     android:layout_width="0dp"
@@ -66,9 +71,9 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="Rechercher ou entrer une URL..."
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#707088"
-                    android:paddingVertical="18dp"
+                    android:textColor="@color/textPrimary"
+                    android:textColorHint="@color/textMuted"
+                    android:paddingVertical="16dp"
                     android:inputType="textUri"
                     android:imeOptions="actionSearch"
                     android:maxLines="1"
@@ -77,9 +82,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="➜"
-                    android:textSize="24sp"
-                    android:textColor="#7B61FF"
-                    android:padding="16dp"
+                    android:textSize="22sp"
+                    android:textColor="@color/primary"
+                    android:padding="12dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:onClick="validerRecherche"/>
@@ -90,33 +95,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="🌐 Sites populaires"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="20dp"/>
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="12dp">
 
                 <!-- Google -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#2A2A3C"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="28dp"
+                    android:background="@drawable/card_bg"
+                    android:layout_margin="6dp"
+                    android:paddingVertical="24dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="openGoogle">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔍" android:textSize="36sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Google" android:textColor="#FFFFFF" android:textSize="15sp" android:layout_marginTop="12dp"/>
+                    android:onClick="openGoogle"
+                    android:elevation="4dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔍" android:textSize="32sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Google" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
 
                 <!-- YouTube -->
@@ -124,16 +130,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#2A2A3C"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="28dp"
+                    android:background="@drawable/card_bg"
+                    android:layout_margin="6dp"
+                    android:paddingVertical="24dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="openYouTube">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶️" android:textSize="36sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="YouTube" android:textColor="#FFFFFF" android:textSize="15sp" android:layout_marginTop="12dp"/>
+                    android:onClick="openYouTube"
+                    android:elevation="4dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶️" android:textSize="32sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="YouTube" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -142,23 +149,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_marginBottom="40dp">
+                android:layout_marginBottom="28dp">
 
                 <!-- Instagram -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#2A2A3C"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="28dp"
+                    android:background="@drawable/card_bg"
+                    android:layout_margin="6dp"
+                    android:paddingVertical="24dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="openInstagram">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📸" android:textSize="36sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Instagram" android:textColor="#FFFFFF" android:textSize="15sp" android:layout_marginTop="12dp"/>
+                    android:onClick="openInstagram"
+                    android:elevation="4dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📸" android:textSize="32sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Instagram" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
 
                 <!-- Reddit -->
@@ -166,16 +174,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="#2A2A3C"
-                    android:layout_margin="8dp"
-                    android:paddingVertical="28dp"
+                    android:background="@drawable/card_bg"
+                    android:layout_margin="6dp"
+                    android:paddingVertical="24dp"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="openReddit">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🤖" android:textSize="36sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reddit" android:textColor="#FFFFFF" android:textSize="15sp" android:layout_marginTop="12dp"/>
+                    android:onClick="openReddit"
+                    android:elevation="4dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🤖" android:textSize="32sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reddit" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -183,79 +192,95 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#3A3A50"
-                android:layout_marginBottom="24dp"/>
+                android:background="@color/divider"
+                android:layout_marginBottom="20dp"/>
 
-            <!-- Pied de page -->
+            <!-- Accès rapides -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚡ Accès rapides"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:layout_marginBottom="24dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toggleAdBlock" android:paddingVertical="16dp" android:clickable="true">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛡️" android:textSize="24sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AdBlock" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openIncognito" android:paddingVertical="16dp" android:clickable="true">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🕵️" android:textSize="24sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Privé" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openFavorites" android:paddingVertical="16dp" android:clickable="true">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐" android:textSize="24sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Favoris" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openHistory" android:paddingVertical="16dp" android:clickable="true">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📜" android:textSize="24sp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Historique" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Version -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ViperBrowser v1.0 🐍"
-                android:textSize="12sp"
-                android:textColor="#707088"
-                android:layout_marginBottom="32dp"/>
-
+                android:text="ViperBrowser v2.0 🐍 — Rapide & Sécurisé"
+                android:textSize="11sp"
+                android:textColor="@color/textMuted"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="40dp"/>
         </LinearLayout>
     </ScrollView>
 
     <!-- ======================================== -->
-    <!-- BARRE DE NAVIGATION EN BAS DE L'ÉCRAN -->
+    <!-- BARRE DE NAVIGATION INFÉRIEURE FIXE -->
     <!-- ======================================== -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1E1E2D"
+        android:background="@color/navBar"
         android:orientation="horizontal"
-        android:paddingVertical="12dp"
-        android:paddingHorizontal="8dp"
-        android:elevation="8dp">
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="4dp"
+        android:elevation="16dp">
 
-        <!-- Page d'accueil -->
+        <!-- Accueil -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingVertical="4dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="retourAccueil">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🏠"
-                android:textSize="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Accueil"
-                android:textColor="#7B61FF"
-                android:textSize="11sp"
-                android:layout_marginTop="2dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="22sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accueil" android:textColor="@color/navIconActive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
 
-        <!-- Retour arrière -->
+        <!-- Précédent -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingVertical="4dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="pagePrecedente">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="◀"
-                android:textSize="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Précédent"
-                android:textColor="#B0B0C0"
-                android:textSize="11sp"
-                android:layout_marginTop="2dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◀" android:textSize="22sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Précédent" android:textColor="@color/navIconInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
 
         <!-- Suivant -->
@@ -265,21 +290,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingVertical="4dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="pageSuivante">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="▶"
-                android:textSize="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Suivant"
-                android:textColor="#B0B0C0"
-                android:textSize="11sp"
-                android:layout_marginTop="2dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶" android:textSize="22sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Suivant" android:textColor="@color/navIconInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
 
         <!-- Actualiser -->
@@ -289,45 +305,27 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingVertical="4dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="actualiser">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🔄"
-                android:textSize="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Actualiser"
-                android:textColor="#B0B0C0"
-                android:textSize="11sp"
-                android:layout_marginTop="2dp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔄" android:textSize="22sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Actualiser" android:textColor="@color/navIconInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
 
-        <!-- Favoris -->
+        <!-- Paramètres -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
+            android:paddingVertical="4dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="ouvrirFavoris">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⭐"
-                android:textSize="24dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Favoris"
-                android:textColor="#B0B0C0"
-                android:textSize="11sp"
-                android:layout_marginTop="2dp"/>
+            android:onClick="openSettings">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="22sp"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paramètres" android:textColor="@color/navIconInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
     </LinearLayout>
 
