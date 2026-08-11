@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,76 +17,83 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     private static final String PREFS_NAME = "ViperBrowserPrefs";
     private List<String> onglets = new ArrayList<>();
-    private static boolean estEnCours = false; // Pour detecter crash
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         
-        // ===== ALERTE SI L'APP S'EST FERMÉE LA DERNIÈRE FOIS =====
-        boolean etatCrash = prefs.getBoolean("app_crashee", false);
-        if (etatCrash) {
-            Toast.makeText(this, "⚠️ L'application s'est fermée anormalement la dernière fois", Toast.LENGTH_LONG).show();
-            prefs.edit().putBoolean("app_crashee", false).apply(); // Reinitialiser
+        try {
+            setContentView(R.layout.activity_main);
+            prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            
+            // ✅ Verifier si l'app s'est fermee anormalement — AVEC DELAI pour etre sur que l'ecran est pret
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                try {
+                    boolean etatCrash = prefs.getBoolean("app_crashee", false);
+                    if (etatCrash) {
+                        Toast.makeText(MainActivity.this, "⚠️ L'application s'est fermée anormalement la dernière fois", Toast.LENGTH_LONG).show();
+                        prefs.edit().putBoolean("app_crashee", false).apply();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }, 300); // Attendre 300ms que l'ecran soit affiche
+            
+            // Marquer l'app comme en cours
+            prefs.edit().putBoolean("app_en_cours", true).apply();
+            
+            searchBar = findViewById(R.id.searchBar);
+            if (searchBar != null) {
+                searchBar.setOnEditorActionListener((v, actionId, event) -> {
+                    validerRecherche(v);
+                    return true;
+                });
+            }
+            
+            onglets.add("Accueil");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur au demarrage: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        
-        // Marquer l'app comme en cours d'execution
-        prefs.edit().putBoolean("app_en_cours", true).apply();
-        estEnCours = true;
-        
-        prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        searchBar = findViewById(R.id.searchBar);
-        searchBar.setOnEditorActionListener((v, actionId, event) -> {
-            validerRecherche(v);
-            return true;
-        });
-        onglets.add("Accueil");
     }
 
-    // ===== ENREGISTRER LA FERMETURE NORMALE =====
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        estEnCours = false;
-        prefs.edit().putBoolean("app_en_cours", false).apply();
-        prefs.edit().putBoolean("app_crashee", false).apply();
-    }
-
-    // ===== ENREGISTRER LE CRASH SI L'APP EST TUÉE =====
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (isFinishing()) {
-            // Fermeture normale
-            prefs.edit().putBoolean("app_crashee", false).apply();
-        } else {
-            // Passage en arrière-plan (normal)
+        try {
+            if (isFinishing()) {
+                prefs.edit()
+                    .putBoolean("app_en_cours", false)
+                    .putBoolean("app_crashee", false)
+                    .apply();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }
-
-    // Methode pour verifier au prochain demarrage
-    public static boolean verifierCrash(SharedPreferences prefs) {
-        return prefs.getBoolean("app_en_cours", false);
     }
 
     public void validerRecherche(View v) {
-        String requete = searchBar.getText().toString().trim();
-        if (requete.isEmpty()) {
-            Toast.makeText(this, "Saisis une URL ou un mot-cle 🔍", Toast.LENGTH_SHORT).show();
-            return;
+        try {
+            String requete = searchBar.getText().toString().trim();
+            if (requete.isEmpty()) {
+                Toast.makeText(this, "Saisis une URL ou un mot-cle 🔍", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String url;
+            if (requete.startsWith("http://") || requete.startsWith("https://")) {
+                url = requete;
+            } else if (requete.contains(".") && !requete.contains(" ")) {
+                url = "https://" + requete;
+            } else {
+                url = "https://www.google.com/search?q=" + requete.replace(" ", "+");
+            }
+            ajouterHistorique(url);
+            ouvrirUrl(url);
+            searchBar.setText("");
+        } catch (Exception e) {
+            Toast.makeText(this, "Erreur: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        String url;
-        if (requete.startsWith("http://") || requete.startsWith("https://")) {
-            url = requete;
-        } else if (requete.contains(".") && !requete.contains(" ")) {
-            url = "https://" + requete;
-        } else {
-            url = "https://www.google.com/search?q=" + requete.replace(" ", "+");
-        }
-        ajouterHistorique(url);
-        ouvrirUrl(url);
-        searchBar.setText("");
     }
 
     public void openGoogle(View v) { ouvrir("https://google.com"); }
@@ -109,13 +118,10 @@ public class MainActivity extends AppCompatActivity {
     public void toggleAdBlock(View v) {
         boolean estActif = prefs.getBoolean("adblock_enabled", false);
         prefs.edit().putBoolean("adblock_enabled", !estActif).apply();
-        Toast.makeText(this, estActif ? "🛡️ AdBlock DESACTIVE" : "🛡️ AdBlock ACTIF - " + 150 + " domaines bloques", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, estActif ? "🛡️ AdBlock DESACTIVE" : "🛡️ AdBlock ACTIF", Toast.LENGTH_SHORT).show();
     }
 
-    public void traduirePage(View v) {
-        Toast.makeText(this, "🌐 Traduction automatique: Google Translate", Toast.LENGTH_SHORT).show();
-    }
-
+    public void traduirePage(View v) { Toast.makeText(this, "🌐 Traduction automatique: Google Translate", Toast.LENGTH_SHORT).show(); }
     public void openFavorites(View v) { Toast.makeText(this, "⭐ Favoris - " + compterFavoris() + " elements", Toast.LENGTH_SHORT).show(); }
     public void openHistory(View v) { Toast.makeText(this, "📜 Historique - " + compterHistorique() + " pages", Toast.LENGTH_SHORT).show(); }
 
