@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.ViperBrowser" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Palette Material 3 -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnPrimary">@color/onPrimary</item>
         <item name="colorPrimaryContainer">@color/primaryContainer</item>
@@ -18,21 +19,10 @@
         <item name="colorOnSurfaceVariant">@color/onSurfaceVariant</item>
         <item name="colorError">@color/error</item>
         <item name="colorOnError">@color/onError</item>
+        
+        <!-- Barres système -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@color/surface</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance_Viper_Large</item>
-        <item name="shapeAppearanceMedium">@style/ShapeAppearance_Viper_Medium</item>
-        <item name="shapeAppearanceSmall">@style/ShapeAppearance_Viper_Small</item>
-    </style>
-
-    <style name="ShapeAppearance_Viper_Large" parent="ShapeAppearance.Material3.Corner.Large">
-        <item name="cornerSize">28dp</item>
-    </style>
-    <style name="ShapeAppearance_Viper_Medium" parent="ShapeAppearance.Material3.Corner.Medium">
-        <item name="cornerSize">24dp</item>
-    </style>
-    <style name="ShapeAppearance_Viper_Small" parent="ShapeAppearance.Material3.Corner.Small">
-        <item name="cornerSize">12dp</item>
     </style>
 </resources>
