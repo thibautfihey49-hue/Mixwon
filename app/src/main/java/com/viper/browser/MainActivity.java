@@ -1,40 +1,77 @@
 package com.viper.browser;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.graphics.Color;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText searchBar;
+
+    // Zone d'affichage des erreurs — TOUJOURS visible
+    private TextView errorLogView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        searchBar = findViewById(R.id.searchBar);
+
+        try {
+            // Charger le layout normal
+            setContentView(R.layout.activity_main);
+            
+            // Afficher message de succès
+            ajouterLog("✅ Application démarrée avec succès", Color.GREEN);
+
+        } catch (Throwable t) {
+            // --- ERREUR DÉTECTÉE — Afficher l'écran d'erreur ---
+            t.printStackTrace();
+            
+            // Créer un écran d'erreur qui REMPLACE tout
+            ScrollView scrollView = new ScrollView(this);
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setBackgroundColor(Color.BLACK);
+            layout.setPadding(32, 32, 32, 32);
+
+            // Titre
+            TextView titre = new TextView(this);
+            titre.setText("❌ ERREUR DÉTECTÉE");
+            titre.setTextColor(Color.RED);
+            titre.setTextSize(24);
+            titre.setPadding(0, 0, 0, 24);
+            layout.addView(titre);
+
+            // Message d'erreur
+            errorLogView = new TextView(this);
+            errorLogView.setTextColor(Color.YELLOW);
+            errorLogView.setTextSize(14);
+            errorLogView.setText(obtenirStackTrace(t));
+            layout.addView(errorLogView);
+
+            scrollView.addView(layout);
+            setContentView(scrollView);
+        }
     }
 
-    public void openGoogle(View v) {
-        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", "https://google.com"));
+    // Ajouter un message dans le log
+    private void ajouterLog(String message, int couleur) {
+        // On peut aussi garder ça pour plus tard
     }
-    public void openYouTube(View v) {
-        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", "https://youtube.com"));
+
+    // Convertir l'erreur complète en texte lisible
+    private String obtenirStackTrace(Throwable t) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("MESSAGE: ").append(t.getMessage()).append("\n\n");
+        sb.append("CAUSE: ").append(t.getCause()).append("\n\n");
+        sb.append("--- PILE D'APPEL ---\n");
+        for (StackTraceElement elt : t.getStackTrace()) {
+            sb.append("  at ").append(elt.getClassName())
+              .append(".").append(elt.getMethodName())
+              .append("(").append(elt.getFileName())
+              .append(":").append(elt.getLineNumber())
+              .append(")\n");
+        }
+        return sb.toString();
     }
-    public void openInstagram(View v) {
-        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", "https://instagram.com"));
-    }
-    public void openReddit(View v) {
-        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", "https://reddit.com"));
-    }
-    public void toggleAdBlock(View v) { Toast.makeText(this, "AdBlock", Toast.LENGTH_SHORT).show(); }
-    public void openIncognito(View v) { Toast.makeText(this, "Incognito", Toast.LENGTH_SHORT).show(); }
-    public void toggleNightMode(View v) { Toast.makeText(this, "Mode Nuit", Toast.LENGTH_SHORT).show(); }
-    public void toggleDataSaving(View v) { Toast.makeText(this, "Éco données", Toast.LENGTH_SHORT).show(); }
-    public void openFavorites(View v) { Toast.makeText(this, "Favoris", Toast.LENGTH_SHORT).show(); }
-    public void toggleAutoClear(View v) { Toast.makeText(this, "Auto-Clear", Toast.LENGTH_SHORT).show(); }
-    public void effacerTout(View v) { searchBar.setText(""); }
-    public void openSettings(View v) { Toast.makeText(this, "Paramètres", Toast.LENGTH_SHORT).show(); }
 }
