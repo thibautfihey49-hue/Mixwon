@@ -13,12 +13,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        searchBar = findViewById(R.id.searchBar);
-        searchBar.setOnEditorActionListener((v, actionId, event) -> {
-            chercherOuOuvrir();
-            return true;
-        });
+        try {
+            setContentView(R.layout.activity_main);
+            searchBar = findViewById(R.id.searchBar);
+            
+            searchBar.setOnEditorActionListener((v, actionId, event) -> {
+                chercherOuOuvrir();
+                return true;
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
+        }
     }
 
     private void chercherOuOuvrir() {
@@ -48,12 +55,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, WebViewActivity.class).putExtra("url", url));
     }
 
-    public void openIncognito(View v) { Toast.makeText(this, "Mode Incognito", Toast.LENGTH_SHORT).show(); }
-    public void toggleAdBlock(View v) { Toast.makeText(this, "AdBlock activé", Toast.LENGTH_SHORT).show(); }
-    public void toggleNightMode(View v) { Toast.makeText(this, "Mode Nuit", Toast.LENGTH_SHORT).show(); }
-    public void toggleDataSaving(View v) { Toast.makeText(this, "Éco données", Toast.LENGTH_SHORT).show(); }
-    public void toggleAutoClear(View v) { Toast.makeText(this, "Auto-Clear", Toast.LENGTH_SHORT).show(); }
-    public void openFavorites(View v) { Toast.makeText(this, "Favoris", Toast.LENGTH_SHORT).show(); }
+    public void openIncognito(View v) { Toast.makeText(this, "Mode Incognito bientôt", Toast.LENGTH_SHORT).show(); }
+    public void toggleAdBlock(View v) { Toast.makeText(this, "AdBlock bientôt", Toast.LENGTH_SHORT).show(); }
+    public void toggleNightMode(View v) { Toast.makeText(this, "Mode Nuit bientôt", Toast.LENGTH_SHORT).show(); }
+    public void toggleDataSaving(View v) { Toast.makeText(this, "Éco données bientôt", Toast.LENGTH_SHORT).show(); }
+    public void toggleAutoClear(View v) { Toast.makeText(this, "Auto-Clear bientôt", Toast.LENGTH_SHORT).show(); }
+    public void openFavorites(View v) { Toast.makeText(this, "Favoris bientôt", Toast.LENGTH_SHORT).show(); }
     public void effacerTout(View v) { searchBar.setText(""); }
-    public void openSettings(View v) { Toast.makeText(this, "Paramètres", Toast.LENGTH_SHORT).show(); }
+    public void openSettings(View v) { Toast.makeText(this, "Paramètres bientôt", Toast.LENGTH_SHORT).show(); }
 }
