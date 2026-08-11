@@ -1,439 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center_horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViperBrowser"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="@color/onBackground"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="8dp"/>
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rapide • Sécurisé • Moderne"
-        android:textSize="14sp"
-        android:textColor="@color/onSurfaceVariant"
-        android:layout_marginBottom="40dp"/>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/surfaceVariant"
-        app:cornerRadius="28dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/outlineVariant"
-        android:layout_marginBottom="44dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="6dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🔍"
-                android:textSize="22sp"
-                android:padding="16dp"/>
-            <EditText
-                android:id="@+id/searchBar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="Rechercher ou entrer une URL..."
-                android:textColor="@color/onSurface"
-                android:textColorHint="@color/onSurfaceVariant"
-                android:paddingVertical="18dp"
-                android:inputType="textUri"
-                android:imeOptions="actionSearch"
-                android:maxLines="1"
-                android:textSize="16sp"/>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sites populaires"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/onBackground"
-        android:layout_marginBottom="20dp"
-        android:paddingStart="4dp"/>
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        android:layout_marginBottom="40dp">
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
+        <!-- En-tête -->
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/surfaceVariant"
-            app:cornerRadius="24dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/outlineVariant"
-            android:layout_margin="6dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="openGoogle">
-            <LinearLayout 
-                android:layout_width="match_parent" 
-                android:layout_height="wrap_content" 
-                android:orientation="vertical" 
-                android:gravity="center" 
-                android:paddingVertical="24dp">
-                <TextView 
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🐍 ViperBrowser"
+                android:textSize="42sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rapide • Sécurisé • Moderne"
+                android:textSize="15sp"
+                android:textColor="@color/textSecondary"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <!-- Barre de recherche -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/backgroundCard"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            android:layout_marginBottom="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="6dp"
+                android:gravity="center_vertical">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🔍" 
-                    android:textSize="28sp" 
-                    android:layout_marginBottom="10dp"/>
-                <TextView 
+                    android:text="🔍"
+                    android:textSize="24sp"
+                    android:padding="16dp"/>
+                <EditText
+                    android:id="@+id/searchBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="Rechercher ou entrer une URL..."
+                    android:textColor="@color/textPrimary"
+                    android:textColorHint="@color/textMuted"
+                    android:paddingVertical="18dp"
+                    android:inputType="textUri"
+                    android:imeOptions="actionSearch"
+                    android:maxLines="1"
+                    android:textSize="16sp"/>
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Google" 
-                    android:textColor="@color/onSurface" 
-                    android:textSize="14sp"/>
+                    android:text="➜"
+                    android:textSize="24sp"
+                    android:textColor="@color/primary"
+                    android:padding="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="validerRecherche"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
+        <!-- Sites populaires -->
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/surfaceVariant"
-            app:cornerRadius="24dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/outlineVariant"
-            android:layout_margin="6dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="openYouTube">
-            <LinearLayout 
-                android:layout_width="match_parent" 
-                android:layout_height="wrap_content" 
-                android:orientation="vertical" 
-                android:gravity="center" 
-                android:paddingVertical="24dp">
-                <TextView 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="▶️" 
-                    android:textSize="28sp" 
-                    android:layout_marginBottom="10dp"/>
-                <TextView 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="YouTube" 
-                    android:textColor="@color/onSurface" 
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            android:text="🌐 Sites populaires"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary"
+            android:layout_marginBottom="20dp"/>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/surfaceVariant"
-            app:cornerRadius="24dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/outlineVariant"
-            android:layout_margin="6dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="openInstagram">
-            <LinearLayout 
-                android:layout_width="match_parent" 
-                android:layout_height="wrap_content" 
-                android:orientation="vertical" 
-                android:gravity="center" 
-                android:paddingVertical="24dp">
-                <TextView 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📸" 
-                    android:textSize="28sp" 
-                    android:layout_marginBottom="10dp"/>
-                <TextView 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Instagram" 
-                    android:textColor="@color/onSurface" 
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
+            <!-- Google -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/backgroundCard"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="28dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openGoogle">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔍" android:textSize="36sp" android:layout_marginBottom="12dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Google" android:textColor="@color/textPrimary" android:textSize="15sp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- YouTube -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/backgroundCard"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="28dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openYouTube">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶️" android:textSize="36sp" android:layout_marginBottom="12dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="YouTube" android:textColor="@color/textPrimary" android:textSize="15sp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/surfaceVariant"
-            app:cornerRadius="24dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/outlineVariant"
-            android:layout_margin="6dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="openReddit">
-            <LinearLayout 
-                android:layout_width="match_parent" 
-                android:layout_height="wrap_content" 
-                android:orientation="vertical" 
-                android:gravity="center" 
-                android:paddingVertical="24dp">
-                <TextView 
-                    android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="40dp">
+
+            <!-- Instagram -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/backgroundCard"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🤖" 
-                    android:textSize="28sp" 
-                    android:layout_marginBottom="10dp"/>
-                <TextView 
-                    android:layout_width="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="28dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openInstagram">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📸" android:textSize="36sp" android:layout_marginBottom="12dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Instagram" android:textColor="@color/textPrimary" android:textSize="15sp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Reddit -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/backgroundCard"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:layout_margin="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Reddit" 
-                    android:textColor="@color/onSurface" 
-                    android:textSize="14sp"/>
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:paddingVertical="28dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="openReddit">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🤖" android:textSize="36sp" android:layout_marginBottom="12dp"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reddit" android:textColor="@color/textPrimary" android:textSize="15sp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Outils -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚙️ Outils"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_marginBottom="16dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toggleAdBlock" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛡️" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AdBlock" android:textColor="@color/textSecondary" android:textSize="12sp"/>
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openIncognito" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🕵️" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Incognito" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toggleNightMode" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌙" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mode Nuit" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toggleDataSaving" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚡" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Éco" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:layout_marginBottom="24dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openFavorites" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Favoris" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toggleAutoClear" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🧹" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Auto-Clear" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="effacerTout" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🗑️" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Effacer" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openSettings" android:paddingVertical="20dp" android:clickable="true">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="28sp" android:layout_marginBottom="8dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paramètres" android:textColor="@color/textSecondary" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Pied de page -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ViperBrowser v1.0 🐍"
+            android:textSize="12sp"
+            android:textColor="@color/textMuted"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"/>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Outils"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/onBackground"
-        android:layout_marginBottom="20dp"
-        android:paddingStart="4dp"/>
-
-    <LinearLayout 
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:orientation="horizontal" 
-        android:weightSum="4" 
-        android:layout_marginBottom="10dp">
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="toggleAdBlock" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🛡️" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AdBlock" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="openIncognito" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🕵️" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Incognito" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="toggleNightMode" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🌙" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mode Nuit" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="toggleDataSaving" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⚡" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Éco" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout 
-        android:layout_width="match_parent" 
-        android:layout_height="wrap_content" 
-        android:orientation="horizontal" 
-        android:weightSum="4">
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="openFavorites" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⭐" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Favoris" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="toggleAutoClear" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🧹" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Auto-Clear" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="effacerTout" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🗑️" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Effacer" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-        <LinearLayout 
-            android:layout_width="0dp" 
-            android:layout_height="wrap_content" 
-            android:layout_weight="1" 
-            android:gravity="center" 
-            android:orientation="vertical" 
-            android:onClick="openSettings" 
-            android:paddingVertical="18dp" 
-            android:clickable="true" 
-            android:focusable="true">
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⚙️" 
-                android:textSize="24sp" 
-                android:layout_marginBottom="8dp"/>
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Paramètres" 
-                android:textColor="@color/onSurfaceVariant" 
-                android:textSize="12sp"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/outlineVariant"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViperBrowser v1.0 — Material 3"
-        android:textSize="12sp"
-        android:textColor="@color/outline"
-        android:layout_marginTop="8dp"/>
-</LinearLayout>
+</ScrollView>

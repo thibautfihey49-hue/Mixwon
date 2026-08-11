@@ -1,77 +1,63 @@
 package com.viper.browser;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.graphics.Color;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-    // Zone d'affichage des erreurs — TOUJOURS visible
-    private TextView errorLogView;
+    private EditText searchBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         try {
-            // Charger le layout normal
             setContentView(R.layout.activity_main);
-            
-            // Afficher message de succès
-            ajouterLog("✅ Application démarrée avec succès", Color.GREEN);
-
+            searchBar = findViewById(R.id.searchBar);
+            searchBar.setOnEditorActionListener((v, actionId, event) -> {
+                validerRecherche(v);
+                return true;
+            });
         } catch (Throwable t) {
-            // --- ERREUR DÉTECTÉE — Afficher l'écran d'erreur ---
-            t.printStackTrace();
-            
-            // Créer un écran d'erreur qui REMPLACE tout
-            ScrollView scrollView = new ScrollView(this);
-            LinearLayout layout = new LinearLayout(this);
-            layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setBackgroundColor(Color.BLACK);
-            layout.setPadding(32, 32, 32, 32);
-
-            // Titre
-            TextView titre = new TextView(this);
-            titre.setText("❌ ERREUR DÉTECTÉE");
-            titre.setTextColor(Color.RED);
-            titre.setTextSize(24);
-            titre.setPadding(0, 0, 0, 24);
-            layout.addView(titre);
-
-            // Message d'erreur
-            errorLogView = new TextView(this);
-            errorLogView.setTextColor(Color.YELLOW);
-            errorLogView.setTextSize(14);
-            errorLogView.setText(obtenirStackTrace(t));
-            layout.addView(errorLogView);
-
-            scrollView.addView(layout);
-            setContentView(scrollView);
+            Toast.makeText(this, "ERREUR: " + t.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
-    // Ajouter un message dans le log
-    private void ajouterLog(String message, int couleur) {
-        // On peut aussi garder ça pour plus tard
+    public void validerRecherche(View v) {
+        String requete = searchBar.getText().toString().trim();
+        if (requete.isEmpty()) {
+            Toast.makeText(this, "Saisis une URL ou un mot-clé 🔍", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String url;
+        if (requete.startsWith("http://") || requete.startsWith("https://")) {
+            url = requete;
+        } else if (requete.contains(".") && !requete.contains(" ")) {
+            url = "https://" + requete;
+        } else {
+            url = "https://www.google.com/search?q=" + requete.replace(" ", "+");
+        }
+        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", url));
+        searchBar.setText("");
     }
 
-    // Convertir l'erreur complète en texte lisible
-    private String obtenirStackTrace(Throwable t) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("MESSAGE: ").append(t.getMessage()).append("\n\n");
-        sb.append("CAUSE: ").append(t.getCause()).append("\n\n");
-        sb.append("--- PILE D'APPEL ---\n");
-        for (StackTraceElement elt : t.getStackTrace()) {
-            sb.append("  at ").append(elt.getClassName())
-              .append(".").append(elt.getMethodName())
-              .append("(").append(elt.getFileName())
-              .append(":").append(elt.getLineNumber())
-              .append(")\n");
-        }
-        return sb.toString();
+    public void openGoogle(View v) { ouvrir("https://google.com"); }
+    public void openYouTube(View v) { ouvrir("https://youtube.com"); }
+    public void openInstagram(View v) { ouvrir("https://instagram.com"); }
+    public void openReddit(View v) { ouvrir("https://reddit.com"); }
+
+    private void ouvrir(String url) {
+        startActivity(new Intent(this, WebViewActivity.class).putExtra("url", url));
     }
+
+    public void toggleAdBlock(View v) { Toast.makeText(this, "🛡️ AdBlock activé", Toast.LENGTH_SHORT).show(); }
+    public void openIncognito(View v) { Toast.makeText(this, "🕵️ Mode Incognito", Toast.LENGTH_SHORT).show(); }
+    public void toggleNightMode(View v) { Toast.makeText(this, "🌙 Mode Nuit", Toast.LENGTH_SHORT).show(); }
+    public void toggleDataSaving(View v) { Toast.makeText(this, "⚡ Éco données", Toast.LENGTH_SHORT).show(); }
+    public void openFavorites(View v) { Toast.makeText(this, "⭐ Favoris", Toast.LENGTH_SHORT).show(); }
+    public void toggleAutoClear(View v) { Toast.makeText(this, "🧹 Auto-Clear", Toast.LENGTH_SHORT).show(); }
+    public void effacerTout(View v) { searchBar.setText(""); Toast.makeText(this, "🗑️ Barre effacée", Toast.LENGTH_SHORT).show(); }
+    public void openSettings(View v) { Toast.makeText(this, "⚙️ Paramètres", Toast.LENGTH_SHORT).show(); }
 }
