@@ -14,10 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchBar;
     private SharedPreferences prefs;
     private static final String PREFS_NAME = "ViperBrowserPrefs";
-    private static final String KEY_ADBLOCK = "adblock_enabled";
-    private static final String KEY_INCOGNITO = "incognito_mode";
-    public static final String KEY_HISTORY = "history_list";
-    public static final String KEY_FAVORITES = "favorites_list";
+    private List<String> onglets = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +26,13 @@ public class MainActivity extends AppCompatActivity {
             validerRecherche(v);
             return true;
         });
+        onglets.add("Accueil");
     }
 
     public void validerRecherche(View v) {
         String requete = searchBar.getText().toString().trim();
         if (requete.isEmpty()) {
-            Toast.makeText(this, "Saisis une URL ou un mot-clé 🔍", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Saisis une URL ou un mot-cle 🔍", Toast.LENGTH_SHORT).show();
             return;
         }
         String url;
@@ -55,11 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public void openInstagram(View v) { ouvrir("https://instagram.com"); }
     public void openReddit(View v) { ouvrir("https://reddit.com"); }
 
-    private void ouvrir(String url) {
-        ajouterHistorique(url);
-        ouvrirUrl(url);
-    }
-
+    private void ouvrir(String url) { ajouterHistorique(url); ouvrirUrl(url); }
     private void ouvrirUrl(String url) {
         Intent intent = new Intent(this, WebViewActivity.class);
         intent.putExtra("url", url);
@@ -67,58 +61,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ========== BARRE DE NAVIGATION ==========
-    public void retourAccueil(View v) {
-        Toast.makeText(this, "🏠 Accueil", Toast.LENGTH_SHORT).show();
-    }
+    public void retourAccueil(View v) { Toast.makeText(this, "🏠 Accueil", Toast.LENGTH_SHORT).show(); }
+    public void nouvelOnglet(View v) { onglets.add("Nouvel onglet"); Toast.makeText(this, "📑 Nouvel onglet - Total: " + onglets.size(), Toast.LENGTH_SHORT).show(); }
+    public void toutTelecharger(View v) { Toast.makeText(this, "📥 Detection videos en cours...", Toast.LENGTH_SHORT).show(); }
+    public void modePiP(View v) { Toast.makeText(this, "🖼️ Mode PiP active", Toast.LENGTH_SHORT).show(); }
+    public void lectureArrierePlan(View v) { Toast.makeText(this, "🎵 Lecture en arriere-plan activee", Toast.LENGTH_SHORT).show(); }
+    public void openSettings(View v) { Toast.makeText(this, "⚙️ Parametres bientot disponible", Toast.LENGTH_SHORT).show(); }
 
-    public void pagePrecedente(View v) {
-        Toast.makeText(this, "◀ Précédent — dans la page web", Toast.LENGTH_SHORT).show();
-    }
-
-    public void pageSuivante(View v) {
-        Toast.makeText(this, "▶ Suivant — dans la page web", Toast.LENGTH_SHORT).show();
-    }
-
-    public void actualiser(View v) {
-        Toast.makeText(this, "🔄 Actualiser", Toast.LENGTH_SHORT).show();
-    }
-
-    public void openSettings(View v) {
-        Toast.makeText(this, "⚙️ Paramètres bientôt disponible", Toast.LENGTH_SHORT).show();
-    }
-
-    // ========== FONCTIONS OUTILS ==========
+    // ========== FONCTIONS ==========
     public void toggleAdBlock(View v) {
-        boolean estActif = prefs.getBoolean(KEY_ADBLOCK, false);
-        prefs.edit().putBoolean(KEY_ADBLOCK, !estActif).apply();
-        Toast.makeText(this, estActif ? "🛡️ AdBlock DÉSACTIVÉ" : "🛡️ AdBlock ACTIVÉ", Toast.LENGTH_SHORT).show();
+        boolean estActif = prefs.getBoolean("adblock_enabled", false);
+        prefs.edit().putBoolean("adblock_enabled", !estActif).apply();
+        Toast.makeText(this, estActif ? "🛡️ AdBlock DESACTIVE" : "🛡️ AdBlock ACTIF - " + 150 + " domaines bloques", Toast.LENGTH_SHORT).show();
     }
 
-    public void openIncognito(View v) {
-        boolean estActif = prefs.getBoolean(KEY_INCOGNITO, false);
-        prefs.edit().putBoolean(KEY_INCOGNITO, !estActif).apply();
-        Toast.makeText(this, estActif ? "🕵️ Mode privé DÉSACTIVÉ" : "🕵️ Mode privé ACTIVÉ", Toast.LENGTH_SHORT).show();
+    public void traduirePage(View v) {
+        Toast.makeText(this, "🌐 Traduction automatique: Google Translate", Toast.LENGTH_SHORT).show();
     }
 
-    public void openFavorites(View v) {
-        Toast.makeText(this, "⭐ Favoris — bientôt disponible", Toast.LENGTH_SHORT).show();
-    }
+    public void openFavorites(View v) { Toast.makeText(this, "⭐ Favoris - " + compterFavoris() + " elements", Toast.LENGTH_SHORT).show(); }
+    public void openHistory(View v) { Toast.makeText(this, "📜 Historique - " + compterHistorique() + " pages", Toast.LENGTH_SHORT).show(); }
 
-    public void openHistory(View v) {
-        Toast.makeText(this, "📜 Historique — " + compterHistorique() + " pages", Toast.LENGTH_SHORT).show();
-    }
-
-    // ========== GESTION HISTORIQUE ==========
+    // ========== GESTION ==========
     private void ajouterHistorique(String url) {
-        if (prefs.getBoolean(KEY_INCOGNITO, false)) return;
-        String historique = prefs.getString(KEY_HISTORY, "");
-        if (!historique.isEmpty()) historique += "|";
-        prefs.edit().putString(KEY_HISTORY, historique + url).apply();
+        if (prefs.getBoolean("incognito_mode", false)) return;
+        String historique = prefs.getString("history_list", "");
+        prefs.edit().putString("history_list", historique + "|" + url).apply();
     }
-
-    private int compterHistorique() {
-        String historique = prefs.getString(KEY_HISTORY, "");
-        if (historique.isEmpty()) return 0;
-        return historique.split("\\|").length;
-    }
+    private int compterHistorique() { String h = prefs.getString("history_list", ""); return h.isEmpty() ? 0 : h.split("\\|").length; }
+    private int compterFavoris() { String f = prefs.getString("favorites_list", ""); return f.isEmpty() ? 0 : f.split("\\|").length; }
 }

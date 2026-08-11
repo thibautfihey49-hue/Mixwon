@@ -2,22 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0F1A"
+    android:background="@color/background"
     android:orientation="vertical">
 
-    <!-- Barre d'adresse en haut -->
+    <!-- Barre d'onglets -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#1A1A2E"
+        android:background="@color/surface"
         android:orientation="horizontal"
-        android:padding="8dp"
-        android:gravity="center"
+        android:padding="4dp"
         android:elevation="4dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◀" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="precedent"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="suivant"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↻" android:textSize="20sp" android:padding="8dp" android:clickable="true" android:onClick="actualiser"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/urlAffichage" android:text="" android:textSize="12sp" android:textColor="#B0B0C0" android:paddingHorizontal="8dp" android:ellipsize="middle" android:maxLines="1"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◀" android:textSize="18sp" android:padding="8dp" android:clickable="true" android:onClick="precedent"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶" android:textSize="18sp" android:padding="8dp" android:clickable="true" android:onClick="suivant"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/urlAffichage" android:text="" android:textSize="12sp" android:textColor="@color/textSecondary" android:paddingHorizontal="8dp" android:ellipsize="middle" android:maxLines="1"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🌐" android:textSize="18sp" android:padding="8dp" android:clickable="true" android:onClick="traduirePage"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔄" android:textSize="18sp" android:padding="8dp" android:clickable="true" android:onClick="actualiser"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✖" android:textSize="18sp" android:padding="8dp" android:clickable="true" android:onClick="retourAccueil"/>
     </LinearLayout>
 
@@ -28,36 +28,33 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- BARRE DE NAVIGATION EN BAS (identique à l'accueil) -->
+    <!-- Barre de navigation inférieure -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#181828"
+        android:background="@color/navBar"
         android:orientation="horizontal"
         android:paddingVertical="8dp"
-        android:paddingHorizontal="4dp"
         android:elevation="16dp">
-
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:onClick="retourAccueil">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="20sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accueil" android:textColor="#7B61FF" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="retourAccueil">
+            <TextView android:text="🏠" android:textSize="20sp"/>
+            <TextView android:text="Accueil" android:textColor="@color/navActive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:onClick="precedent">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◀" android:textSize="20sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Précédent" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="precedent">
+            <TextView android:text="◀" android:textSize="20sp"/>
+            <TextView android:text="Precedent" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:onClick="suivant">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶" android:textSize="20sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Suivant" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="suivant">
+            <TextView android:text="▶" android:textSize="20sp"/>
+            <TextView android:text="Suivant" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:onClick="actualiser">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔄" android:textSize="20sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Actualiser" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="detecterVideos">
+            <TextView android:text="🎬" android:textSize="20sp"/>
+            <TextView android:text="Videos" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:paddingVertical="4dp" android:clickable="true" android:onClick="ouvrirParametres">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="20sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paramètres" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="modePiP">
+            <TextView android:text="🖼️" android:textSize="20sp"/>
+            <TextView android:text="PiP" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

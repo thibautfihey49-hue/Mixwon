@@ -2,9 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0F0F1A"
+    android:background="@color/background"
     android:orientation="vertical"
     android:fitsSystemWindows="true">
+
+    <!-- Barre d'onglets -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:elevation="4dp">
+        
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/tabsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"/>
+        </HorizontalScrollView>
+        
+        <TextView
+            android:id="@+id/newTabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="22sp"
+            android:textColor="@color/primary"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="nouvelOnglet"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,45 +56,32 @@
             android:paddingBottom="24dp"
             android:gravity="center_horizontal">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_marginBottom="36dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ViperBrowser"
-                    android:textSize="38sp"
-                    android:textStyle="bold"
-                    android:textColor="#7B61FF"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rapide - Securise - Moderne"
-                    android:textSize="14sp"
-                    android:textColor="#B0B0C0"
-                    android:layout_marginTop="6dp"/>
-            </LinearLayout>
+                android:text="🐍 ViperBrowser"
+                android:textSize="38sp"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:layout_marginBottom="6dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rapide - Securise - Moderne"
+                android:textSize="14sp"
+                android:textColor="@color/textSecondary"
+                android:layout_marginBottom="36dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#252538"
+                android:background="@color/card"
                 android:orientation="horizontal"
                 android:padding="4dp"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="36dp"
-                android:elevation="6dp"
-                android:layout_marginTop="8dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🔍"
-                    android:textSize="20sp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="8dp"/>
+                android:elevation="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔍" android:textSize="20sp" android:paddingStart="16dp"/>
                 <EditText
                     android:id="@+id/searchBar"
                     android:layout_width="0dp"
@@ -68,246 +89,94 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="Rechercher ou entrer une URL..."
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#707088"
+                    android:textColor="@color/textPrimary"
+                    android:textColorHint="@color/textMuted"
                     android:paddingVertical="16dp"
                     android:inputType="textUri"
                     android:imeOptions="actionSearch"
                     android:maxLines="1"
                     android:textSize="16sp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="➜"
-                    android:textSize="22sp"
-                    android:textColor="#7B61FF"
-                    android:padding="12dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="validerRecherche"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="➜" android:textSize="22sp" android:textColor="@color/primary" android:padding="12dp" android:clickable="true" android:onClick="validerRecherche"/>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sites populaires"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="16dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Sites populaires" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/textPrimary" android:layout_marginBottom="16dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginBottom="12dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#252538"
-                    android:layout_margin="6dp"
-                    android:paddingVertical="24dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="openGoogle"
-                    android:elevation="4dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔍" android:textSize="32sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Google" android:textColor="#FFFFFF" android:textSize="14sp" android:layout_marginTop="10dp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginBottom="12dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/card" android:layout_margin="6dp" android:paddingVertical="24dp" android:gravity="center" android:orientation="vertical" android:clickable="true" android:onClick="openGoogle">
+                    <TextView android:text="🔍" android:textSize="32sp"/>
+                    <TextView android:text="Google" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#252538"
-                    android:layout_margin="6dp"
-                    android:paddingVertical="24dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="openYouTube"
-                    android:elevation="4dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶️" android:textSize="32sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="YouTube" android:textColor="#FFFFFF" android:textSize="14sp" android:layout_marginTop="10dp"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/card" android:layout_margin="6dp" android:paddingVertical="24dp" android:gravity="center" android:orientation="vertical" android:clickable="true" android:onClick="openYouTube">
+                    <TextView android:text="▶️" android:textSize="32sp"/>
+                    <TextView android:text="YouTube" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginBottom="28dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#252538"
-                    android:layout_margin="6dp"
-                    android:paddingVertical="24dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="openInstagram"
-                    android:elevation="4dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📸" android:textSize="32sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Instagram" android:textColor="#FFFFFF" android:textSize="14sp" android:layout_marginTop="10dp"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="2" android:layout_marginBottom="28dp">
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/card" android:layout_margin="6dp" android:paddingVertical="24dp" android:gravity="center" android:orientation="vertical" android:clickable="true" android:onClick="openInstagram">
+                    <TextView android:text="📸" android:textSize="32sp"/>
+                    <TextView android:text="Instagram" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#252538"
-                    android:layout_margin="6dp"
-                    android:paddingVertical="24dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:onClick="openReddit"
-                    android:elevation="4dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🤖" android:textSize="32sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reddit" android:textColor="#FFFFFF" android:textSize="14sp" android:layout_marginTop="10dp"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/card" android:layout_margin="6dp" android:paddingVertical="24dp" android:gravity="center" android:orientation="vertical" android:clickable="true" android:onClick="openReddit">
+                    <TextView android:text="🤖" android:textSize="32sp"/>
+                    <TextView android:text="Reddit" android:textColor="@color/textPrimary" android:textSize="14sp" android:layout_marginTop="10dp"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#3A3A5C"
-                android:layout_marginBottom="20dp"/>
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginBottom="20dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Acces rapides"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="16dp"/>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Fonctions rapides" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/textPrimary" android:layout_marginBottom="16dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="4"
-                android:layout_marginBottom="24dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:weightSum="4" android:layout_marginBottom="24dp">
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toggleAdBlock" android:paddingVertical="16dp" android:clickable="true">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛡️" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="AdBlock" android:textColor="#B0B0C0" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                    <TextView android:text="🛡️" android:textSize="24sp"/>
+                    <TextView android:text="AdBlock" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
                 </LinearLayout>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openIncognito" android:paddingVertical="16dp" android:clickable="true">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🕵️" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Prive" android:textColor="#B0B0C0" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="traduirePage" android:paddingVertical="16dp" android:clickable="true">
+                    <TextView android:text="🌐" android:textSize="24sp"/>
+                    <TextView android:text="Traduire" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
                 </LinearLayout>
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openFavorites" android:paddingVertical="16dp" android:clickable="true">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⭐" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Favoris" android:textColor="#B0B0C0" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                    <TextView android:text="⭐" android:textSize="24sp"/>
+                    <TextView android:text="Favoris" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
                 </LinearLayout>
                 <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openHistory" android:paddingVertical="16dp" android:clickable="true">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📜" android:textSize="24sp"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Historique" android:textColor="#B0B0C0" android:textSize="11sp" android:layout_marginTop="4dp"/>
+                    <TextView android:text="📜" android:textSize="24sp"/>
+                    <TextView android:text="Historique" android:textColor="@color/textSecondary" android:textSize="11sp" android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ViperBrowser v2.0"
-                android:textSize="11sp"
-                android:textColor="#707088"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="40dp"/>
+            <TextView android:text="ViperBrowser v3.0" android:textSize="11sp" android:textColor="@color/textMuted" android:layout_marginTop="8dp"/>
         </LinearLayout>
     </ScrollView>
 
+    <!-- Barre de navigation inférieure -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#181828"
+        android:background="@color/navBar"
         android:orientation="horizontal"
         android:paddingVertical="8dp"
-        android:paddingHorizontal="4dp"
         android:elevation="16dp">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="retourAccueil">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏠" android:textSize="22sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accueil" android:textColor="#7B61FF" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="retourAccueil">
+            <TextView android:text="🏠" android:textSize="22sp"/>
+            <TextView android:text="Accueil" android:textColor="@color/navActive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="pagePrecedente">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="◀" android:textSize="22sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Precedent" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="toutTelecharger">
+            <TextView android:text="📥" android:textSize="22sp"/>
+            <TextView android:text="Videos" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="pageSuivante">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="▶" android:textSize="22sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Suivant" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="modePiP">
+            <TextView android:text="🖼️" android:textSize="22sp"/>
+            <TextView android:text="PiP" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="actualiser">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🔄" android:textSize="22sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Actualiser" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="lectureArrierePlan">
+            <TextView android:text="🎵" android:textSize="22sp"/>
+            <TextView android:text="Arriere-plan" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="openSettings">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⚙️" android:textSize="22sp"/>
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Parametres" android:textColor="#8888A0" android:textSize="10sp" android:layout_marginTop="2dp"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:orientation="vertical" android:onClick="openSettings">
+            <TextView android:text="⚙️" android:textSize="22sp"/>
+            <TextView android:text="Parametres" android:textColor="@color/navInactive" android:textSize="10sp" android:layout_marginTop="2dp"/>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
