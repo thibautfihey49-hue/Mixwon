@@ -5,13 +5,14 @@
     android:background="#0F0F1A"
     android:orientation="vertical">
 
-    <!-- Barre d'onglets -->
+    <!-- BARRE D'ONGLETS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#1A1A2E"
         android:orientation="horizontal"
         android:padding="4dp">
+
         <HorizontalScrollView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"/>
         </HorizontalScrollView>
+
         <TextView
             android:id="@+id/newTabBtn"
             android:layout_width="wrap_content"
@@ -31,14 +33,16 @@
             android:textColor="#7B61FF"
             android:padding="8dp"
             android:clickable="true"
+            android:focusable="true"
             android:onClick="nouvelOnglet"/>
     </LinearLayout>
 
-    <!-- Contenu principal -->
+    <!-- CONTENU PRINCIPAL -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +66,7 @@
                 android:textColor="#B0B0C0"
                 android:layout_marginBottom="30dp"/>
 
-            <!-- Barre de recherche -->
+            <!-- BARRE DE RECHERCHE -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +102,7 @@
                     android:onClick="validerRecherche"/>
             </LinearLayout>
 
-            <!-- Sites populaires -->
+            <!-- SITES POPULAIRES -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,13 +181,14 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- SEPARATEUR -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#3A3A5C"
                 android:layout_marginVertical="20dp"/>
 
-            <!-- Fonctions rapides -->
+            <!-- FONCTIONS RAPIDES -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,7 +260,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Barre de navigation - SIMPLIFIÉE AU MAX -->
+    <!-- BARRE DE NAVIGATION EN BAS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
